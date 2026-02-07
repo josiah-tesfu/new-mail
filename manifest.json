@@ -1,0 +1,38 @@
+{
+  "manifest_version": 3,
+  "name": "Gmail Filter: Show Only New Mail",
+  "version": "0.1.0",
+  "description": "Show only new Gmail messages since your last session.",
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAv7gZknQgrBUXoZQdKRVLCvW7MPzZiYver4d0CMIMEHjr8p6Xr3L1hJnwsRFLOYH56N78q8NzN9oa9BFB2xhEL/ZK88DO9myWYOYfpzJZgoXKuWFID2Nn5krH2RQvlZY01Eg95RCkEAZIg0ppDh6WxtKxow1sw1NMNjAm1KMMU45CBqstZaAtsQmZy1V3pmvTW3J4uvjwSZ+R5ohS07tN3UHjgZk6TZuEXYncc7Ylw0Szjv5ip+IUvBeg2ALS5rs0C7PqATT7cNPgZiin+uu3hHrp6NKS1x0Id0QPLUBCzbGKAze7/7yW3ZSWOzyFQdYZGhh+ET2CQKt5CvqAkvzwBwIDAQAB",
+  "action": {
+    "default_title": "New Mail",
+    "default_popup": "popup.html"
+  },
+  "background": {
+    "service_worker": "service_worker.js",
+    "type": "module"
+  },
+  "options_ui": {
+    "page": "options.html",
+    "open_in_tab": true
+  },
+  "permissions": ["storage", "identity", "alarms"],
+  "host_permissions": ["https://mail.google.com/*", "https://www.googleapis.com/*"],
+  "oauth2": {
+    "client_id": "1070443905646-39l974b88lkfjpa314rbl0tpk717pa5v.apps.googleusercontent.com",
+    "scopes": ["https://www.googleapis.com/auth/gmail.readonly"]
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://mail.google.com/*"],
+      "js": ["content_script.js"],
+      "css": ["content_script.css"],
+      "run_at": "document_idle"
+    }
+  ],
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  }
+}
